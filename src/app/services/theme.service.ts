@@ -1,51 +1,50 @@
-import { Injectable, Renderer2, RendererFactory2 } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
+export type ThemeMode = 'system' | 'light' | 'dark';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class ThemeService {
-	private renderer: Renderer2;
+	private readonly media = window.matchMedia('(prefers-color-scheme: dark)');
+	private mode = new BehaviorSubject<ThemeMode>('system');
 	private darkMode = new BehaviorSubject<boolean>(false);
+	public mode$ = this.mode.asObservable();
 	public darkMode$ = this.darkMode.asObservable();
 
-	constructor(rendererFactory: RendererFactory2) {
-		this.renderer = rendererFactory.createRenderer(null, null);
-		this.initTheme();
-	}
-
-	private initTheme(): void {
+	constructor() {
 		const storedTheme = localStorage.getItem('theme');
-		const prefersDark =
-			window.matchMedia &&
-			window.matchMedia('(prefers-color-scheme: dark)').matches;
+		const mode: ThemeMode =
+			storedTheme === 'light' || storedTheme === 'dark' ? storedTheme : 'system';
+		this.setMode(mode);
 
-		if (storedTheme === 'dark' || (!storedTheme && prefersDark)) {
-			this.setDarkMode(true);
-		} else {
-			this.setDarkMode(false);
-		}
+		/* no modo "sistema", acompanha a troca de tema do sistema operacional */
+		this.media.addEventListener('change', () => {
+			if (this.mode.value === 'system') this.applyTheme();
+		});
 	}
 
-	toggleTheme(): void {
-		this.setDarkMode(!this.darkMode.value);
-	}
-
-	setDarkMode(isDark: boolean): void {
-		this.darkMode.next(isDark);
-
-		if (isDark) {
-			document.body.classList.add('dark-theme');
-			document.body.classList.remove('light-theme');
-			localStorage.setItem('theme', 'dark');
+	setMode(mode: ThemeMode): void {
+		this.mode.next(mode);
+		if (mode === 'system') {
+			localStorage.removeItem('theme');
 		} else {
-			document.body.classList.add('light-theme');
-			document.body.classList.remove('dark-theme');
-			localStorage.setItem('theme', 'light');
+			localStorage.setItem('theme', mode);
 		}
+		this.applyTheme();
 	}
 
 	isDarkMode(): boolean {
 		return this.darkMode.value;
+	}
+
+	private applyTheme(): void {
+		const isDark =
+			this.mode.value === 'dark' ||
+			(this.mode.value === 'system' && this.media.matches);
+		this.darkMode.next(isDark);
+		document.body.classList.toggle('dark-theme', isDark);
+		document.body.classList.toggle('light-theme', !isDark);
 	}
 }
