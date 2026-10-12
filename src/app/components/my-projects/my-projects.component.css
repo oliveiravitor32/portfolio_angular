@@ -157,17 +157,22 @@
 	min-height: 280px;
 }
 
+/* tags e rodapé presos na base, alinhados em todos os cards */
 .project-card__technologies {
 	margin-top: auto;
 	padding-top: var(--sp-1);
 }
 
 .project-card__title {
-	font-size: 1.35rem;
+	font-size: 1rem;
 	font-weight: var(--font-weight-bold);
 	line-height: 1.2;
 	letter-spacing: -0.015em;
 	color: var(--text-primary);
+	/* uma linha só, com reticências, para os cards ficarem alinhados */
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .project-card__description {
@@ -182,7 +187,7 @@
 
 .project-card__case-study {
 	align-self: flex-start;
-	font-size: 1rem;
+	font-size: var(--font-size-description);
 	font-weight: var(--font-weight-bold);
 	color: var(--accent);
 }
@@ -196,7 +201,8 @@
 	align-items: center;
 	justify-content: space-between;
 	gap: var(--sp-3);
-	margin-top: auto;
+	/* fica colado nas tags; as tags é que vão para o fim do card */
+	margin-top: var(--sp-2);
 	padding-top: var(--sp-4);
 	border-top: 1px solid var(--border);
 }
@@ -205,7 +211,7 @@
 	display: inline-flex;
 	align-items: center;
 	gap: var(--sp-2);
-	font-size: 1rem;
+	font-size: var(--font-size-description);
 	font-weight: var(--font-weight-bold);
 	color: var(--text-primary);
 	transition: color var(--transition-speed) var(--transition-timing);
@@ -253,4 +259,14 @@
 	.project-card__carousel-nav {
 		opacity: 1;
 	}
+}
+
+/* texto de descrição: 14px */
+.project-card__description {
+	font-size: var(--font-size-description);
+}
+
+/* tags do card: 12px, discretas */
+.project-card .tech-chip {
+	font-size: var(--font-size-tag);
 }

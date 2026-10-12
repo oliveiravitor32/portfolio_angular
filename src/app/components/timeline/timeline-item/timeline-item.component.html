@@ -10,11 +10,11 @@
 		/>
 	</div>
 	<div class="timeline-item__content">
-		<span class="timeline-item__time-period">{{ item.meta }}</span>
 		<h3 class="timeline-item__institution-name">{{ item.title }}</h3>
 		<p class="timeline-item__program-title">{{ item.subtitle }}</p>
-		<p class="timeline-item__location" *ngIf="item.location">
-			{{ item.location }}
+		<p class="timeline-item__time-period">
+			{{ item.meta
+			}}<ng-container *ngIf="item.location"> · {{ item.location }}</ng-container>
 		</p>
 
 		<p class="timeline-item__detail" *ngFor="let detail of item.details">

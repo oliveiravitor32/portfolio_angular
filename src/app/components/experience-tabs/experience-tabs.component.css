@@ -3,7 +3,7 @@
 	gap: 0.25rem;
 	padding: 0.25rem;
 	background-color: var(--bg-secondary);
-	border-radius: 5px;
+	border-radius: 6px;
 }
 
 .tabs__button {
@@ -14,7 +14,7 @@
 	background-color: transparent;
 	padding: 0.3rem 1rem;
 	cursor: pointer;
-	border-radius: 5px;
+	border-radius: 6px;
 	transition:
 		background-color 0.2s ease,
 		color 0.2s ease;
@@ -28,17 +28,42 @@
 .tabs__content {
 	position: relative;
 	margin-top: 0.5rem;
+	/* limite de altura: o que passar disso rola dentro do quadro */
+	max-height: 350px;
+	overflow-y: auto;
 	border: 2px solid var(--bg-secondary);
-	border-radius: 15px;
+	border-radius: 6px;
+	/* linha vertical da timeline; "local" faz ela acompanhar a rolagem */
+	background: linear-gradient(var(--bg-secondary), var(--bg-secondary)) no-repeat
+		35px 0 / 2px 100%;
+	background-attachment: local;
 }
 
-.tabs__content::before {
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 40px;
-	width: 2px;
-	height: 100%;
-	background-color: var(--bg-secondary);
-	z-index: -1;
+/* Barra de rolagem fina, nas cores do tema.
+   Firefox e Chrome/Edge 121+ usam as propriedades padrão; o Safari (e
+   navegadores Chromium mais antigos) usam os pseudo-elementos -webkit-. */
+.tabs__content {
+	scrollbar-width: thin;
+	scrollbar-color: color-mix(in srgb, var(--text-secondary) 45%, transparent)
+		transparent;
+}
+
+@supports not (scrollbar-color: auto) {
+	.tabs__content::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	.tabs__content::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.tabs__content::-webkit-scrollbar-thumb {
+		background-color: color-mix(in srgb, var(--text-secondary) 45%, transparent);
+		border: 2px solid var(--bg-primary);
+		border-radius: 6px;
+	}
+
+	.tabs__content::-webkit-scrollbar-thumb:hover {
+		background-color: var(--text-secondary);
+	}
 }
