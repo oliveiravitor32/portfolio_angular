@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+	<!-- cores do tema escuro: fundo (bg-primary), borda (border) e destaque (accent) -->
+	<circle cx="32" cy="32" r="31" fill="#0d0f11" stroke="#282e35" stroke-width="2" />
+	<text
+		x="32"
+		y="33"
+		fill="#809fff"
+		font-family="Poppins, system-ui, sans-serif"
+		font-size="26"
+		font-weight="700"
+		letter-spacing="-1"
+		text-anchor="middle"
+		dominant-baseline="central"
+	>VO</text>
+</svg>
