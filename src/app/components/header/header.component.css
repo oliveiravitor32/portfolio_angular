@@ -29,40 +29,14 @@
 }
 
 .header__link {
-	position: relative;
 	color: var(--text-secondary);
 	font-size: var(--font-size-body);
 	font-weight: 300;
 	transition: color var(--transition-speed) var(--transition-timing);
 }
 
-.header__link::after {
-	content: "";
-	position: absolute;
-	left: 0;
-	bottom: -4px;
-	width: 100%;
-	height: 2px;
-	background-color: var(--accent);
-	border-radius: 2px;
-	transform: scaleX(0);
-	transform-origin: left;
-	transition: transform var(--transition-speed) var(--transition-timing);
-}
-
 .header__link:hover {
 	color: var(--text-primary);
-}
-
-.header__link:hover::after,
-.header__link:focus-visible::after {
-	transform: scaleX(1);
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.header__link::after {
-		transition: none;
-	}
 }
 
 .header__mobile-menu {
