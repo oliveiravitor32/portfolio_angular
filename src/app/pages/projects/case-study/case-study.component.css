@@ -31,7 +31,7 @@
 }
 
 .case-study__title {
-	font-size: 2.5rem;
+	font-size: var(--font-size-title);
 	color: var(--text-primary);
 }
 
@@ -237,6 +237,6 @@
 
 @media screen and (max-width: 640px) {
 	.case-study__title {
-		font-size: 2rem;
+		font-size: var(--font-size-title);
 	}
 }

@@ -5,12 +5,35 @@
 	list-style: none;
 	text-decoration: none;
 	vertical-align: baseline;
-	font-family: var(--font-family);
 	box-sizing: border-box;
 }
 
+/* a fonte vem do body e é herdada, para o header poder usar outra */
+body {
+	font-family: var(--font-family);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+nav {
+	font-family: var(--font-family-ui);
+}
+
+button,
+input,
+textarea,
+select {
+	font-family: inherit;
+}
+
 :root {
-	--font-family: "Hanken Grotesk", system-ui, sans-serif;
+	/* corpo do texto: Inter; navegação e títulos: Poppins */
+	--font-family: "Inter", system-ui, sans-serif;
+	--font-family-ui: "Poppins", system-ui, sans-serif;
 	--font-weight-light: 400;
 	--font-weight-medium: 500;
 	--font-weight-bold: 600;
@@ -32,6 +55,15 @@
 	--max-body-width: 1024px;
 	/* 1ch é a largura do "0"; 66ch dá em média 70 caracteres reais por linha */
 	--max-line: 66ch;
+	/* textos de descrição: experiência, projetos, tags, sobre e sumário lateral */
+	/* texto corrido padrão */
+	--font-size-body: 1rem;
+	--font-size-description: 0.875rem;
+	/* tags dos cards de projeto: discretas para não competir com o conteúdo */
+	--font-size-tag: 0.75rem;
+	/* títulos de página e de seção; o nome na página inicial é maior */
+	--font-size-title: 1.5rem;
+	--font-size-hero: 2rem;
 	/* altura do header fixo; conteúdo fixo (como o sumário) desconta esse valor */
 	--header-height: 56px;
 }
@@ -50,8 +82,8 @@ body.light-theme {
 	--text-primary: hsl(210deg 15% 15%);
 	--text-secondary: hsl(210deg 10% 45%);
 
-	--accent: hsl(240deg 95% 62%);
-	--accent-soft: hsl(240deg 95% 62% / 0.09);
+	--accent: hsl(225deg 90% 58%);
+	--accent-soft: hsl(225deg 90% 58% / 0.08);
 	--secondary: hsl(340deg 95% 45%);
 	--success: hsl(160deg 100% 32%);
 	--border: hsl(210deg 18% 90%);
@@ -85,7 +117,7 @@ body.dark-theme {
 body {
 	background-color: var(--bg-primary);
 	color: var(--text-primary);
-	font-size: 1rem;
+	font-size: var(--font-size-body);
 	line-height: 1.5;
 	font-weight: var(--font-weight-light);
 	-webkit-font-smoothing: antialiased;
@@ -124,7 +156,7 @@ h3 {
 	border-radius: 6px;
 	background-color: var(--accent-soft);
 	color: var(--accent);
-	font-size: 1rem;
+	font-size: var(--font-size-tag);
 	font-weight: var(--font-weight-bold);
 	line-height: 1.4;
 }

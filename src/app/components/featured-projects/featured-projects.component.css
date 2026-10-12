@@ -5,6 +5,7 @@
 }
 
 .featured-projects__title {
+	font-size: var(--font-size-title);
 	color: var(--text-primary);
 }
 

@@ -13,7 +13,7 @@
 
 .container__title {
 	color: var(--text-primary);
-	font-size: 2rem;
+	font-size: var(--font-size-title);
 }
 
 .container__subtitle {
