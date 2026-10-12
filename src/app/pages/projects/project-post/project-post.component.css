@@ -1,0 +1,361 @@
+/* Mesmo layout da página de atividade: texto no centro da tela e sumário
+   preso na borda direita */
+.project-layout {
+	--layout-width: min(100vw - 2rem, 1440px);
+	display: grid;
+	grid-template-columns: 1fr minmax(0, var(--max-line)) 1fr;
+	gap: var(--sp-12);
+	align-items: start;
+	width: var(--layout-width);
+	margin-left: calc(50% - var(--layout-width) / 2);
+	margin-top: calc(var(--header-height) + var(--sp-6) - 120px);
+}
+
+.project {
+	grid-column: 2;
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-6);
+	min-width: 0;
+}
+
+.project__back {
+	align-self: center;
+	color: var(--text-secondary);
+	transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.project__back:hover {
+	color: var(--text-primary);
+}
+
+/* Abertura centralizada: título, tecnologias, repositório e links */
+.project__header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--sp-2);
+	text-align: center;
+}
+
+.project__title {
+	font-size: var(--font-size-title);
+	line-height: 1.25;
+	color: var(--text-primary);
+}
+
+.project__tags {
+	justify-content: center;
+	margin-block: var(--sp-1);
+}
+
+.project__meta {
+	font-size: var(--font-size-description);
+	font-style: italic;
+	color: var(--text-secondary);
+}
+
+.project__links {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: var(--sp-2);
+	margin-top: var(--sp-2);
+}
+
+.project__link {
+	padding: var(--sp-1) var(--sp-3);
+	font-size: var(--font-size-description);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	transition: border-color var(--transition-speed) var(--transition-timing);
+}
+
+.project__link:hover {
+	border-color: var(--text-secondary);
+}
+
+.project__cover {
+	position: relative;
+	padding: 0;
+	overflow: hidden;
+	cursor: zoom-in;
+	background: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.project__cover-image {
+	display: block;
+	width: 100%;
+	aspect-ratio: 16 / 9;
+	object-fit: cover;
+	transition: opacity var(--transition-speed) var(--transition-timing);
+}
+
+.project__cover:hover .project__cover-image {
+	opacity: 0.85;
+}
+
+.project__cover-count {
+	position: absolute;
+	right: var(--sp-2);
+	bottom: var(--sp-2);
+	padding: 2px var(--sp-2);
+	font-size: var(--font-size-tag);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+	background-color: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+	border-radius: 6px;
+}
+
+.project__status {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	color: var(--text-secondary);
+}
+
+.project__status a,
+.project__source a {
+	color: var(--accent);
+	font-weight: var(--font-weight-bold);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.project__source {
+	padding-top: var(--sp-5);
+	font-size: var(--font-size-description);
+	color: var(--text-secondary);
+	border-top: 1px solid var(--border);
+}
+
+/* README renderizado: tipografia de leitura, como um markdown no GitHub.
+   O HTML entra por innerHTML, por isso os estilos usam ::ng-deep, sempre
+   presos ao .readme deste componente. */
+.readme {
+	font-size: var(--font-size-body);
+	line-height: 1.75;
+	color: var(--text-primary);
+	overflow-wrap: break-word;
+}
+
+.readme ::ng-deep > * + * {
+	margin-top: var(--sp-5);
+}
+
+.readme ::ng-deep h1,
+.readme ::ng-deep h2,
+.readme ::ng-deep h3,
+.readme ::ng-deep h4 {
+	line-height: 1.3;
+	scroll-margin-top: calc(var(--header-height) + var(--sp-6));
+}
+
+.readme ::ng-deep h1,
+.readme ::ng-deep h2 {
+	margin-top: var(--sp-10, 2.5rem);
+	padding-bottom: var(--sp-3);
+	font-size: var(--font-size-section);
+	border-bottom: 1px solid var(--border);
+}
+
+.readme ::ng-deep > h1:first-child,
+.readme ::ng-deep > h2:first-child {
+	margin-top: 0;
+}
+
+.readme ::ng-deep h3 {
+	margin-top: var(--sp-8);
+	font-size: var(--font-size-section);
+}
+
+.readme ::ng-deep h4 {
+	font-size: var(--font-size-body);
+}
+
+.readme ::ng-deep a {
+	color: var(--accent);
+	font-weight: var(--font-weight-bold);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+}
+
+.readme ::ng-deep ul,
+.readme ::ng-deep ol {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-2);
+	padding-left: var(--sp-5);
+}
+
+.readme ::ng-deep ul li {
+	list-style: disc;
+}
+
+.readme ::ng-deep ol li {
+	list-style: decimal;
+}
+
+.readme ::ng-deep li::marker {
+	color: var(--accent);
+}
+
+.readme ::ng-deep li > ul,
+.readme ::ng-deep li > ol {
+	margin-top: var(--sp-2);
+}
+
+.readme ::ng-deep blockquote {
+	padding-left: var(--sp-4);
+	color: var(--text-secondary);
+	border-left: 3px solid var(--accent);
+}
+
+.readme ::ng-deep img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 6px;
+}
+
+/* imagens soltas num parágrafo (capturas de tela) ocupam a largura toda */
+.readme ::ng-deep p > img:only-child {
+	display: block;
+	width: 100%;
+	border: 1px solid var(--border);
+}
+
+.readme ::ng-deep code {
+	padding: 0.1em 0.35em;
+	font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+	font-size: 0.875em;
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.readme ::ng-deep pre {
+	max-width: 100%;
+	padding: var(--sp-4);
+	overflow-x: auto;
+	font-size: var(--font-size-description);
+	line-height: 1.6;
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.readme ::ng-deep pre code {
+	padding: 0;
+	font-size: inherit;
+	background: none;
+	border: 0;
+}
+
+/* tabelas largas rolam na horizontal em vez de estourar a coluna */
+.readme ::ng-deep table {
+	display: block;
+	max-width: 100%;
+	overflow-x: auto;
+	font-size: var(--font-size-description);
+	border-collapse: collapse;
+}
+
+.readme ::ng-deep th,
+.readme ::ng-deep td {
+	padding: var(--sp-2) var(--sp-3);
+	text-align: left;
+	border: 1px solid var(--border);
+}
+
+.readme ::ng-deep th {
+	background-color: var(--bg-secondary);
+}
+
+.readme ::ng-deep hr {
+	height: 1px;
+	background-color: var(--border);
+}
+
+.readme ::ng-deep input[type="checkbox"] {
+	margin-right: var(--sp-2);
+}
+
+/* Sumário lateral, igual ao da atividade */
+.project-toc {
+	grid-column: 3;
+	justify-self: end;
+	position: sticky;
+	top: calc(var(--header-height) + var(--sp-8));
+	width: 260px;
+	max-height: calc(100vh - var(--header-height) - var(--sp-16));
+	overflow-y: auto;
+	padding-left: var(--sp-4);
+	border-left: 1px solid var(--border);
+	scrollbar-width: thin;
+}
+
+.project-toc__title {
+	margin-bottom: var(--sp-3);
+	font-size: var(--font-size-description);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+.project-toc__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	list-style: none;
+}
+
+.project-toc__link {
+	display: block;
+	font-size: var(--font-size-description);
+	line-height: 1.4;
+	color: var(--text-secondary);
+	transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.project-toc__link--sub {
+	padding-left: var(--sp-4);
+}
+
+.project-toc__link:hover {
+	color: var(--text-primary);
+}
+
+.project-toc__link--active {
+	font-weight: var(--font-weight-bold);
+	color: var(--accent);
+}
+
+@media (max-width: 1240px) {
+	.project-layout {
+		grid-template-columns: minmax(0, var(--max-line));
+		justify-content: center;
+	}
+
+	.project {
+		grid-column: 1;
+	}
+
+	.project-toc {
+		display: none;
+	}
+}
+
+/* Carregamento: ocupa um espaço fixo para o README entrar sem empurrar nada */
+.project__loading {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--sp-4);
+	min-height: 40vh;
+	font-size: var(--font-size-description);
+	color: var(--text-secondary);
+}

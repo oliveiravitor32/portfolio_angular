@@ -17,6 +17,15 @@ Responda sempre em **português do Brasil**.
 - **Sem cantos muito arredondados:** `border-radius: 6px` (equivalente ao
   `rounded-md`). Nada de pílulas nem círculos.
 
+## Carregamento
+
+- **Conteúdo que demora (README do GitHub, imagens externas) mostra o
+  spinner (`.spinner`) até estar pronto.** Motivo: sem isso o texto aparece
+  solto, sem as imagens que dão contexto, e quando elas chegam a página dá um
+  "empurrão" (layout shift), o que atrapalha a leitura. Espere as imagens
+  carregarem (com um limite de tempo) antes de exibir, ou reserve o espaço
+  delas.
+
 ## Fluxo
 
 - Só faça commit quando o autor pedir.

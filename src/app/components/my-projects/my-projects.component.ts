@@ -58,6 +58,10 @@ export class MyProjectsComponent implements OnInit {
 		}
 	}
 
+	projectSlug(project: IProjectItem): string {
+		return this._dataService.getProjectSlug(project);
+	}
+
 	trackByIndex(index: number): number {
 		return index;
 	}

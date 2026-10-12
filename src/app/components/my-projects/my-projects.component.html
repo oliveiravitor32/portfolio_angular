@@ -62,7 +62,14 @@
 				</div>
 
 				<div class="project-card__content">
-					<h3 class="project-card__title" [title]="project.title">{{ project.title }}</h3>
+					<h3 class="project-card__title" [title]="project.title">
+						<!-- o link do título cobre o card inteiro (ver ::after no CSS) -->
+						<a
+							class="project-card__title-link"
+							[routerLink]="['/projetos', projectSlug(project)]"
+							>{{ project.title }}</a
+						>
+					</h3>
 
 					<p class="project-card__description">
 						{{ project.description }}
@@ -71,7 +78,7 @@
 					<a
 						*ngIf="project.case_study_slug"
 						class="project-card__case-study"
-						[routerLink]="['/projetos', project.case_study_slug]"
+						[routerLink]="['/projetos', projectSlug(project), 'estudo-de-caso']"
 						>Ler estudo de caso &rarr;</a
 					>
 

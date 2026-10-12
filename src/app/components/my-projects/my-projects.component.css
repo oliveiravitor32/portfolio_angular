@@ -270,3 +270,41 @@
 .project-card .tech-chip {
 	font-size: var(--font-size-tag);
 }
+
+/* Card inteiro clicável: o ::after do link do título cobre o card, e os
+   controles próprios (setas e pontos do carrossel, estudo de caso, código e
+   demo) ficam por cima. A galeria ampliada fica na página do projeto. */
+.project-card {
+	position: relative;
+}
+
+.project-card__title-link {
+	color: inherit;
+}
+
+.project-card__title-link::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+}
+
+.project-card__title-link:focus-visible {
+	outline: none;
+}
+
+.project-card:has(.project-card__title-link:focus-visible) {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+.project-card__carousel-nav,
+.project-card__carousel-dots {
+	z-index: 2;
+}
+
+.project-card__case-study,
+.project-card__link {
+	position: relative;
+	z-index: 2;
+}

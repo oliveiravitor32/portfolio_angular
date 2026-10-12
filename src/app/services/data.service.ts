@@ -54,6 +54,19 @@ export class DataService {
 		return this.projectsData;
 	}
 
+	/* o slug da página do projeto é o nome do repositório no GitHub */
+	getProjectSlug(project: IProjectItem): string {
+		return project.code_url.replace(/\/+$/, '').split('/').pop() ?? '';
+	}
+
+	getProject(slug: string): IProjectItem | null {
+		return (
+			this.projectsData.projects.find(
+				(project) => this.getProjectSlug(project) === slug,
+			) ?? null
+		);
+	}
+
 	getCaseStudy(
 		slug: string,
 	): { project: IProjectItem; caseStudy: ICaseStudy } | null {

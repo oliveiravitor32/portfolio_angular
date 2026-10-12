@@ -51,7 +51,11 @@ export class CaseStudyComponent implements OnInit, OnDestroy {
 	}
 
 	private loadCaseStudy(slug: string): void {
-		const result = this._dataService.getCaseStudy(slug);
+		/* a rota usa o slug do projeto; o estudo de caso tem o seu próprio slug */
+		const caseStudySlug = this._dataService.getProject(slug)?.case_study_slug;
+		const result = caseStudySlug
+			? this._dataService.getCaseStudy(caseStudySlug)
+			: null;
 
 		if (!result) {
 			this._router.navigate(['/projetos']);

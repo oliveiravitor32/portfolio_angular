@@ -1,0 +1,122 @@
+<div class="project-layout" *ngIf="project">
+	<article class="project">
+		<a class="project__back" routerLink="/projetos">&larr; Todos os projetos</a>
+
+		<header class="project__header">
+			<h1 class="project__title">{{ project.title }}</h1>
+
+			<ul class="project__tags tech-chips" aria-label="Tecnologias usadas">
+				<li class="tech-chip" *ngFor="let technology of project.technologies">
+					{{ technology }}
+				</li>
+			</ul>
+
+			<p class="project__meta">oliveiravitor32/{{ repositoryName }}</p>
+
+			<nav class="project__links" aria-label="Links do projeto">
+				<a
+					class="project__link"
+					[href]="project.code_url"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Código</a
+				>
+				<a
+					*ngIf="project.demo_url"
+					class="project__link"
+					[href]="project.demo_url"
+					target="_blank"
+					rel="noopener noreferrer"
+					>Demo</a
+				>
+				<a
+					*ngIf="project.case_study_slug"
+					class="project__link"
+					routerLink="estudo-de-caso"
+					>Estudo de caso</a
+				>
+			</nav>
+		</header>
+
+		<button
+			*ngIf="project.img_urls.length"
+			class="project__cover"
+			type="button"
+			[attr.aria-label]="'Ampliar as imagens de ' + project.title"
+			(click)="openGallery()"
+		>
+			<img
+				class="project__cover-image"
+				[src]="project.img_urls[0]"
+				[alt]="'Imagem do projeto ' + project.title"
+			/>
+			<span
+				class="project__cover-count"
+				*ngIf="project.img_urls.length > 1"
+				aria-hidden="true"
+				>{{ project.img_urls.length }} imagens</span
+			>
+		</button>
+
+		<!-- README do repositório, buscado no GitHub a cada visita -->
+		<div
+			class="project__loading"
+			*ngIf="readmeState === 'loading'"
+			role="status"
+			aria-live="polite"
+		>
+			<span class="spinner" aria-hidden="true"></span>
+			<p>Carregando o README e as imagens do GitHub…</p>
+		</div>
+
+		<div class="project__status" *ngIf="readmeState === 'error'" role="status">
+			<p>Não consegui carregar o README do GitHub agora.</p>
+			<p>{{ project.description }}</p>
+			<a [href]="project.code_url" target="_blank" rel="noopener noreferrer"
+				>Ver o repositório no GitHub</a
+			>
+		</div>
+
+		<div
+			*ngIf="readme"
+			class="readme"
+			[innerHTML]="readme.html"
+			(click)="onReadmeClick($event)"
+		></div>
+
+		<footer class="project__source" *ngIf="readme">
+			Conteúdo do
+			<a [href]="readme.sourceUrl" target="_blank" rel="noopener noreferrer"
+				>README.md</a
+			>
+			no GitHub, atualizado junto com o repositório.
+		</footer>
+	</article>
+
+	<aside class="project-toc" *ngIf="headings.length" aria-label="Nesta página">
+		<nav>
+			<p class="project-toc__title">Nesta página</p>
+			<ol class="project-toc__list">
+				<li *ngFor="let heading of headings">
+					<a
+						class="project-toc__link"
+						[class.project-toc__link--sub]="heading.level === 3"
+						[class.project-toc__link--active]="activeHeadingId === heading.id"
+						[attr.aria-current]="activeHeadingId === heading.id ? 'location' : null"
+						[href]="'#' + heading.id"
+						(click)="scrollToHeading($event, heading.id)"
+						>{{ heading.title }}</a
+					>
+				</li>
+			</ol>
+		</nav>
+	</aside>
+</div>
+
+<app-project-gallery-modal
+	*ngIf="galleryOpen && project"
+	[images]="project.img_urls"
+	[title]="project.title"
+	[startIndex]="0"
+	(closed)="closeGallery()"
+></app-project-gallery-modal>
