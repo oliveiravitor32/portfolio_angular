@@ -22,12 +22,13 @@
 	<ul class="activities__list">
 		<li class="activity" *ngFor="let activity of visibleActivities">
 			<a class="activity__link" [routerLink]="['/atividades', activity.slug]">
-				<p class="activity__meta">
+				<div class="activity__heading">
 					<span class="activity__badge">{{ activity.category }}</span>
-					<span class="activity__org">{{ activity.organization }}</span>
-					<span class="activity__date">{{ activity.period }}</span>
+					<h2 class="activity__title">{{ activity.title }}</h2>
+				</div>
+				<p class="activity__meta">
+					{{ activity.period }} · {{ activity.organization }}
 				</p>
-				<h2 class="activity__title">{{ activity.title }}</h2>
 				<p class="activity__summary">{{ activity.summary }}</p>
 				<p class="activity__tags" *ngIf="activity.topics?.length">
 					<span *ngFor="let topic of activity.topics">#{{ topic }}</span>

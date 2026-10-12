@@ -5,7 +5,7 @@ import {
 } from 'src/app/interfaces/activities/activity-item.interface';
 import { DataService } from 'src/app/services/data.service';
 
-type ActivityFilter = 'Todas' | ActivityCategory;
+type ActivityFilter = 'Todos' | ActivityCategory;
 
 @Component({
 	selector: 'app-activities',
@@ -16,18 +16,18 @@ export class ActivitiesComponent {
 	readonly activities: IActivityItem[];
 	readonly filters: ActivityFilter[];
 
-	activeFilter: ActivityFilter = 'Todas';
+	activeFilter: ActivityFilter = 'Todos';
 
 	constructor(private readonly _dataService: DataService) {
 		this.activities = [...this._dataService.getActivities()].sort((a, b) =>
 			b.date.localeCompare(a.date),
 		);
 		const categories = new Set(this.activities.map((item) => item.category));
-		this.filters = ['Todas', ...categories];
+		this.filters = ['Todos', ...categories];
 	}
 
 	get visibleActivities(): IActivityItem[] {
-		return this.activeFilter === 'Todas'
+		return this.activeFilter === 'Todos'
 			? this.activities
 			: this.activities.filter((item) => item.category === this.activeFilter);
 	}

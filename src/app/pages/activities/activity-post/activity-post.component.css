@@ -1,11 +1,28 @@
-/* Texto à esquerda e sumário fixo à direita, como em um blog */
+/* Texto centralizado na tela e sumário fixo na borda direita, como em um blog.
+   O layout sai da largura do container principal para ocupar a tela toda. */
 .post-layout {
+	--layout-width: min(100vw - 2rem, 1440px);
 	display: grid;
-	grid-template-columns: minmax(0, var(--max-line)) 220px;
-	justify-content: center;
+	grid-template-columns: 1fr minmax(0, var(--max-line)) 1fr;
 	gap: var(--sp-12);
 	align-items: start;
+	width: var(--layout-width);
+	margin-left: calc(50% - var(--layout-width) / 2);
+	/* sobe a página para o começo do texto aparecer sem rolar */
+	margin-top: calc(var(--header-height) + var(--sp-6) - 120px);
 }
+
+.post {
+	grid-column: 2;
+}
+
+.post-toc {
+	grid-column: 3;
+	justify-self: end;
+	width: 260px;
+}
+
+
 
 /* Coluna de leitura sem fundo, com cerca de 70 caracteres por linha */
 .post {
@@ -15,8 +32,9 @@
 	min-width: 0;
 }
 
+/* cabeçalho do texto centralizado: voltar, autor e título */
 .post__back {
-	align-self: flex-start;
+	align-self: center;
 	font-size: 1rem;
 	color: var(--text-secondary);
 	transition: color var(--transition-speed) var(--transition-timing);
@@ -26,49 +44,31 @@
 	color: var(--text-primary);
 }
 
-.post__author {
+/* Abertura no estilo de blog: título, hashtags e dados do evento centralizados */
+.post__header {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
 	align-items: center;
-	gap: var(--sp-3);
-}
-
-.post__logo {
-	width: 48px;
-	height: 48px;
-	object-fit: contain;
-	background: #fff;
-	border: 1px solid var(--border);
-	border-radius: 6px;
-}
-
-.post__author-info {
-	flex: 1;
-	min-width: 12rem;
-}
-
-.post__org {
-	font-weight: var(--font-weight-bold);
-	color: var(--text-primary);
-}
-
-.post__meta {
-	font-size: 1rem;
-	color: var(--text-secondary);
-}
-
-.post__badge {
-	padding: 2px var(--sp-2);
-	font-size: 1rem;
-	color: var(--text-secondary);
-	border: 1px solid var(--border);
-	border-radius: 6px;
+	gap: var(--sp-1);
+	text-align: center;
 }
 
 .post__title {
-	font-size: 2rem;
+	font-size: var(--font-size-title);
 	line-height: 1.25;
 	color: var(--text-primary);
+}
+
+.post__header .post__tags {
+	justify-content: center;
+	margin-block: var(--sp-1);
+	font-size: var(--font-size-description);
+	color: var(--text-secondary);
+}
+
+.post__meta {
+	font-style: italic;
+	color: var(--text-secondary);
 }
 
 /* Corpo com tipografia de leitura, como um markdown renderizado */
@@ -95,6 +95,10 @@
 	font-size: 1.5rem;
 	line-height: 1.3;
 	border-bottom: 1px solid var(--border);
+}
+
+.post__section:first-child .post__section-title {
+	margin-top: 0;
 }
 
 /* Pessoas: nomes como links em destaque, papel em cor secundária */
@@ -191,7 +195,7 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	aspect-ratio: 4 / 3;
+	aspect-ratio: 16 / 10;
 	object-fit: cover;
 	transition: opacity var(--transition-speed) var(--transition-timing);
 }
@@ -308,9 +312,14 @@
 }
 
 /* Em telas menores o sumário some e o texto ocupa a largura toda */
-@media (max-width: 960px) {
+@media (max-width: 1240px) {
 	.post-layout {
 		grid-template-columns: minmax(0, var(--max-line));
+		justify-content: center;
+	}
+
+	.post {
+		grid-column: 1;
 	}
 
 	.post-toc {
@@ -322,4 +331,10 @@
 	width: 12px;
 	height: 12px;
 	fill: currentColor;
+}
+
+/* texto de descrição: 14px */
+.post-toc__title,
+.post-toc__link {
+	font-size: var(--font-size-description);
 }

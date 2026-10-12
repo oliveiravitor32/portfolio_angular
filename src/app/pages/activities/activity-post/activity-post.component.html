@@ -2,25 +2,23 @@
 	<article class="post">
 		<a class="post__back" routerLink="/atividades">&larr; Todas as atividades</a>
 
-		<header class="post__author">
-			<img
-				class="post__logo"
-				[src]="activity.logoUrl"
-				[alt]="'Logo ' + activity.organization"
-			/>
-			<div class="post__author-info">
-				<p class="post__org">{{ activity.organization }}</p>
-				<p class="post__meta">
-					{{ activity.period
-					}}<ng-container *ngIf="activity.location">
-						· {{ activity.location }}</ng-container
-					>
-				</p>
-			</div>
-			<span class="post__badge">{{ activity.category }}</span>
-		</header>
+		<header class="post__header">
+			<h1 class="post__title">{{ activity.title }}</h1>
 
-		<h1 class="post__title">{{ activity.title }}</h1>
+			<p class="post__tags" *ngIf="activity.topics?.length">
+				<span *ngFor="let topic of activity.topics">#{{ topic }}</span>
+			</p>
+
+			<p class="post__meta">
+				{{ activity.period
+				}}<ng-container *ngIf="activity.location">
+					· {{ activity.location }}</ng-container
+				>
+			</p>
+			<p class="post__meta">
+				{{ activity.category }} · {{ activity.organization }}
+			</p>
+		</header>
 
 		<div
 			class="post__media"
@@ -100,9 +98,6 @@
 				</div>
 			</section>
 
-			<p class="post__tags" *ngIf="activity.topics?.length">
-				<span *ngFor="let topic of activity.topics">#{{ topic }}</span>
-			</p>
 		</div>
 
 		<footer class="post__links" *ngIf="activity.links?.length">

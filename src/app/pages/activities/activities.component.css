@@ -12,12 +12,12 @@
 }
 
 .activities__title {
-	font-size: 2.5rem;
+	font-size: var(--font-size-title);
 	color: var(--text-primary);
 }
 
 .activities__subtitle {
-	font-size: 1.1rem;
+	font-size: var(--font-size-body);
 	color: var(--text-secondary);
 }
 
@@ -30,7 +30,7 @@
 .activities__filter {
 	padding: var(--sp-1) var(--sp-3);
 	font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-	font-size: 1rem;
+	font-size: var(--font-size-description);
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--text-secondary);
@@ -63,27 +63,29 @@
 	border-top: 1px solid var(--border);
 }
 
+/* Item compacto, no estilo de blog: título, hashtags, dados e resumo,
+   cada um com seu peso visual */
 .activity__link {
 	display: flex;
 	flex-direction: column;
-	gap: var(--sp-2);
-	padding: var(--sp-6) 0;
+	gap: var(--sp-1);
+	padding: var(--sp-5) 0;
 	color: inherit;
 	text-decoration: none;
 }
 
-.activity__meta {
+/* tipo da atividade antes do título, como uma etiqueta */
+.activity__heading {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(--sp-3);
-	font-size: 1rem;
+	gap: var(--sp-2) var(--sp-3);
 }
 
 .activity__badge {
 	padding: 2px var(--sp-2);
 	font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-	font-size: 1rem;
+	font-size: var(--font-size-tag);
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
 	color: var(--text-secondary);
@@ -92,17 +94,9 @@
 	border-radius: 6px;
 }
 
-.activity__org {
-	font-weight: var(--font-weight-bold);
-	color: var(--text-primary);
-}
-
-.activity__date {
-	color: var(--text-secondary);
-}
-
 .activity__title {
-	font-size: 1.35rem;
+	font-size: 1.25rem;
+	line-height: 1.3;
 	color: var(--text-primary);
 	transition: color var(--transition-speed) var(--transition-timing);
 }
@@ -111,16 +105,24 @@
 	color: var(--accent);
 }
 
-.activity__summary {
-	line-height: 1.6;
-	color: var(--text-secondary);
-}
-
 .activity__tags {
 	display: flex;
 	flex-wrap: wrap;
-	gap: var(--sp-3);
-	font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
-	font-size: 1rem;
+	gap: 0 var(--sp-3);
+	margin-top: var(--sp-1);
+	font-size: var(--font-size-tag);
+	font-weight: var(--font-weight-bold);
 	color: var(--text-secondary);
+}
+
+.activity__meta {
+	font-size: var(--font-size-description);
+	font-style: italic;
+	color: var(--text-secondary);
+}
+
+.activity__summary {
+	margin-top: var(--sp-2);
+	line-height: 1.6;
+	color: var(--text-primary);
 }
