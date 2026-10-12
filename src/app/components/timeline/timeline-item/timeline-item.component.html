@@ -21,10 +21,33 @@
 			{{ detail }}
 		</p>
 
+		<div class="timeline-item__highlights" *ngIf="item.highlights?.length">
+			<h4 class="timeline-item__highlights-title">
+				{{ item.highlightsTitle ?? 'Destaques' }}
+			</h4>
+			<ul class="timeline-item__highlights-list">
+				<li *ngFor="let highlight of item.highlights">{{ highlight }}</li>
+			</ul>
+		</div>
+
 		<ul class="timeline-item__skills" *ngIf="item.skills?.length">
 			<li class="timeline-item__skill" *ngFor="let skill of item.skills">
 				{{ skill }}
 			</li>
 		</ul>
+
+		<a
+			*ngIf="item.link"
+			class="timeline-item__link"
+			[href]="item.link.url"
+			target="_blank"
+			rel="noopener noreferrer"
+			>{{ item.link.label }}
+			<svg class="timeline-item__link-icon" aria-hidden="true">
+				<use
+					xlink:href="assets/icons/arrow-up-right-icon.svg#arrow-up-right-icon"
+				></use>
+			</svg>
+		</a>
 	</div>
 </div>

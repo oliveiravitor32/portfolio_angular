@@ -10,6 +10,13 @@ const routes: Routes = [
 			import('./pages/projects/projects.module').then((m) => m.ProjectsModule),
 	},
 	{
+		path: 'atividades',
+		loadChildren: () =>
+			import('./pages/activities/activities.module').then(
+				(m) => m.ActivitiesModule,
+			),
+	},
+	{
 		path: '**',
 		loadChildren: () =>
 			import('./pages/page-not-found/page-not-found.module').then(

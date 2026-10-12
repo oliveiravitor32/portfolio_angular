@@ -31,9 +31,12 @@ export class ExperienceTabsComponent implements OnInit {
 	}
 
 	get activeItems(): ITimelineItem[] {
-		return this.activeTab === 'experience'
-			? this.experienceItems
-			: this.educationItems;
+		switch (this.activeTab) {
+			case 'education':
+				return this.educationItems;
+			default:
+				return this.experienceItems;
+		}
 	}
 
 	private fetchTimelineData(): void {

@@ -5,4 +5,5 @@ export interface IProjectItem {
 	code_url: string;
 	technologies: string[];
 	demo_url?: string;
+	case_study_slug?: string;
 }

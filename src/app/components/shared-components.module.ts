@@ -31,6 +31,8 @@ import { TimelineComponent } from './timeline/timeline.component';
 		SocialLinksComponent,
 		FeaturedProjectsComponent,
 		MyProjectsComponent,
+		ProjectGalleryModalComponent,
+		CommonModule,
 	],
 })
 export class SharedComponentsModule {}

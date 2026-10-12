@@ -15,6 +15,7 @@ export const ProjectsData: IProjectsData = {
 			code_url:
 				'https://github.com/oliveiravitor32/leitor-de-pdf-customizavel_react',
 			demo_url: 'https://leitor-de-pdf-customizavel-react.vercel.app/',
+			case_study_slug: 'leitor-de-pdf-customizavel',
 		},
 		{
 			img_urls: ['assets/images/project_game_library.png'],

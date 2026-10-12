@@ -1,0 +1,38 @@
+<section class="activities">
+	<header class="activities__header">
+		<h1 class="activities__title">Atividades</h1>
+		<p class="activities__subtitle">
+			Eventos, apresentações e palestras de que participei.
+		</p>
+	</header>
+
+	<div class="activities__filters" role="group" aria-label="Filtrar por tipo">
+		<button
+			*ngFor="let filter of filters"
+			class="activities__filter"
+			[class.activities__filter--active]="activeFilter === filter"
+			[attr.aria-pressed]="activeFilter === filter"
+			type="button"
+			(click)="selectFilter(filter)"
+		>
+			{{ filter }}
+		</button>
+	</div>
+
+	<ul class="activities__list">
+		<li class="activity" *ngFor="let activity of visibleActivities">
+			<a class="activity__link" [routerLink]="['/atividades', activity.slug]">
+				<p class="activity__meta">
+					<span class="activity__badge">{{ activity.category }}</span>
+					<span class="activity__org">{{ activity.organization }}</span>
+					<span class="activity__date">{{ activity.period }}</span>
+				</p>
+				<h2 class="activity__title">{{ activity.title }}</h2>
+				<p class="activity__summary">{{ activity.summary }}</p>
+				<p class="activity__tags" *ngIf="activity.topics?.length">
+					<span *ngFor="let topic of activity.topics">#{{ topic }}</span>
+				</p>
+			</a>
+		</li>
+	</ul>
+</section>

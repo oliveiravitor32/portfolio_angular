@@ -1,0 +1,325 @@
+/* Texto à esquerda e sumário fixo à direita, como em um blog */
+.post-layout {
+	display: grid;
+	grid-template-columns: minmax(0, var(--max-line)) 220px;
+	justify-content: center;
+	gap: var(--sp-12);
+	align-items: start;
+}
+
+/* Coluna de leitura sem fundo, com cerca de 70 caracteres por linha */
+.post {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-6);
+	min-width: 0;
+}
+
+.post__back {
+	align-self: flex-start;
+	font-size: 1rem;
+	color: var(--text-secondary);
+	transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.post__back:hover {
+	color: var(--text-primary);
+}
+
+.post__author {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--sp-3);
+}
+
+.post__logo {
+	width: 48px;
+	height: 48px;
+	object-fit: contain;
+	background: #fff;
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.post__author-info {
+	flex: 1;
+	min-width: 12rem;
+}
+
+.post__org {
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+.post__meta {
+	font-size: 1rem;
+	color: var(--text-secondary);
+}
+
+.post__badge {
+	padding: 2px var(--sp-2);
+	font-size: 1rem;
+	color: var(--text-secondary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+}
+
+.post__title {
+	font-size: 2rem;
+	line-height: 1.25;
+	color: var(--text-primary);
+}
+
+/* Corpo com tipografia de leitura, como um markdown renderizado */
+.post__body {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-5);
+	font-size: 1.0625rem;
+	line-height: 1.75;
+	color: var(--text-primary);
+}
+
+.post__section {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-5);
+	/* o título não fica escondido atrás do topo ao navegar pelo sumário */
+	scroll-margin-top: calc(var(--header-height) + var(--sp-6));
+}
+
+.post__section-title {
+	margin-top: var(--sp-6);
+	padding-bottom: var(--sp-3);
+	font-size: 1.5rem;
+	line-height: 1.3;
+	border-bottom: 1px solid var(--border);
+}
+
+/* Pessoas: nomes como links em destaque, papel em cor secundária */
+.post__people-group {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+}
+
+.post__people-title {
+	font-size: 1rem;
+	color: var(--text-secondary);
+}
+
+.post__body .post__people {
+	gap: var(--sp-3);
+	padding-left: 0;
+	list-style: none;
+}
+
+.post__body .post__person {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: baseline;
+	gap: 0 var(--sp-3);
+	list-style: none;
+}
+
+.post__body .post__person-link {
+	text-decoration-thickness: 1px;
+}
+
+.post__person-role {
+	color: var(--text-secondary);
+}
+
+.post__body ul {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	padding-left: var(--sp-5);
+	list-style: disc;
+}
+
+.post__body li {
+	list-style: disc;
+}
+
+.post__body li::marker {
+	color: var(--accent);
+}
+
+.post__body blockquote {
+	padding-left: var(--sp-4);
+	color: var(--text-secondary);
+	border-left: 3px solid var(--accent);
+}
+
+.post__body a {
+	color: var(--accent);
+	font-weight: var(--font-weight-bold);
+	text-decoration: underline;
+	text-underline-offset: 3px;
+	word-break: break-word;
+}
+
+.post__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-2) var(--sp-3);
+	font-weight: var(--font-weight-bold);
+	color: var(--accent);
+}
+
+/* Colagem de fotos no estilo do LinkedIn: grade de 6 colunas */
+.post__media {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	gap: 4px;
+	border-radius: 6px;
+	overflow: hidden;
+}
+
+.post__image-button {
+	position: relative;
+	grid-column: span 6;
+	padding: 0;
+	border: 0;
+	background: var(--bg-secondary);
+	cursor: zoom-in;
+}
+
+.post__image {
+	display: block;
+	width: 100%;
+	height: 100%;
+	aspect-ratio: 4 / 3;
+	object-fit: cover;
+	transition: opacity var(--transition-speed) var(--transition-timing);
+}
+
+.post__image-button:hover .post__image {
+	opacity: 0.85;
+}
+
+/* "+3" sobre a última foto quando há mais imagens do que cabem na grade */
+.post__image-more {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2rem;
+	font-weight: var(--font-weight-bold);
+	color: #fff;
+	background-color: hsl(210deg 40% 4% / 0.6);
+}
+
+/* 2 fotos: lado a lado */
+.post__media[data-count="2"] .post__image-button {
+	grid-column: span 3;
+}
+
+/* 3 ou 4 fotos: uma grande em cima, as outras embaixo */
+.post__media[data-count="3"] .post__image-button:not(:first-child) {
+	grid-column: span 3;
+}
+
+.post__media[data-count="4"] .post__image-button:not(:first-child) {
+	grid-column: span 2;
+}
+
+.post__media[data-count="3"] .post__image-button:first-child,
+.post__media[data-count="4"] .post__image-button:first-child {
+	aspect-ratio: 16 / 9;
+}
+
+/* 5 ou mais: duas em cima, três embaixo */
+.post__media[data-count="5"] .post__image-button,
+.post__media[data-count="6"] .post__image-button {
+	grid-column: span 2;
+}
+
+.post__media[data-count="5"] .post__image-button:nth-child(-n + 2) {
+	grid-column: span 3;
+}
+
+.post__links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--sp-3);
+	padding-top: var(--sp-6);
+	border-top: 1px solid var(--border);
+}
+
+.post__link {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--sp-2);
+	padding: var(--sp-2) var(--sp-4);
+	font-size: 1rem;
+	font-weight: var(--font-weight-bold);
+	color: #fff;
+	background: var(--accent);
+	border-radius: 6px;
+	transition: opacity var(--transition-speed) var(--transition-timing);
+}
+
+.post__link:hover {
+	opacity: 0.85;
+}
+
+/* Sumário lateral */
+.post-toc {
+	position: sticky;
+	/* abaixo do header fixo, para não ficar escondido atrás dele */
+	top: calc(var(--header-height) + var(--sp-8));
+	max-height: calc(100vh - var(--header-height) - var(--sp-16));
+	overflow-y: auto;
+	padding-left: var(--sp-4);
+	border-left: 1px solid var(--border);
+}
+
+.post-toc__title {
+	margin-bottom: var(--sp-3);
+	font-weight: var(--font-weight-bold);
+	color: var(--text-primary);
+}
+
+.post-toc__list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--sp-3);
+	list-style: none;
+}
+
+.post-toc__link {
+	display: block;
+	line-height: 1.4;
+	color: var(--text-secondary);
+	transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.post-toc__link:hover {
+	color: var(--text-primary);
+}
+
+.post-toc__link--active {
+	font-weight: var(--font-weight-bold);
+	color: var(--accent);
+}
+
+/* Em telas menores o sumário some e o texto ocupa a largura toda */
+@media (max-width: 960px) {
+	.post-layout {
+		grid-template-columns: minmax(0, var(--max-line));
+	}
+
+	.post-toc {
+		display: none;
+	}
+}
+
+.post__link-icon {
+	width: 12px;
+	height: 12px;
+	fill: currentColor;
+}

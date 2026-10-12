@@ -68,6 +68,13 @@
 						{{ project.description }}
 					</p>
 
+					<a
+						*ngIf="project.case_study_slug"
+						class="project-card__case-study"
+						[routerLink]="['/projetos', project.case_study_slug]"
+						>Ler estudo de caso &rarr;</a
+					>
+
 					<ul
 						class="project-card__technologies tech-chips"
 						aria-label="Tecnologias usadas"

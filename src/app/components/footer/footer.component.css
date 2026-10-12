@@ -10,7 +10,7 @@
 
 .footer__copyright {
 	display: flex;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	color: var(--text-primary);
 }
 

@@ -34,7 +34,7 @@
 	border-radius: 999px;
 	background-color: var(--gray-100);
 	color: var(--text-secondary);
-	font-size: 0.75rem;
+	font-size: 1rem;
 	font-weight: var(--font-weight-medium);
 }
 
@@ -145,10 +145,10 @@
 	}
 
 	.profile-card__role {
-		font-size: 0.95rem;
+		font-size: 1rem;
 	}
 
 	.profile-card__text {
-		font-size: 0.9rem;
+		font-size: 1rem;
 	}
 }

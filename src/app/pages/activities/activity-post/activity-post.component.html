@@ -1,0 +1,151 @@
+<div class="post-layout" *ngIf="activity">
+	<article class="post">
+		<a class="post__back" routerLink="/atividades">&larr; Todas as atividades</a>
+
+		<header class="post__author">
+			<img
+				class="post__logo"
+				[src]="activity.logoUrl"
+				[alt]="'Logo ' + activity.organization"
+			/>
+			<div class="post__author-info">
+				<p class="post__org">{{ activity.organization }}</p>
+				<p class="post__meta">
+					{{ activity.period
+					}}<ng-container *ngIf="activity.location">
+						· {{ activity.location }}</ng-container
+					>
+				</p>
+			</div>
+			<span class="post__badge">{{ activity.category }}</span>
+		</header>
+
+		<h1 class="post__title">{{ activity.title }}</h1>
+
+		<div
+			class="post__media"
+			*ngIf="activity.images?.length"
+			[attr.data-count]="visibleImages.length"
+		>
+			<button
+				*ngFor="let image of visibleImages; let i = index; let last = last"
+				class="post__image-button"
+				type="button"
+				[attr.aria-label]="
+					last && hiddenImagesCount
+						? 'Ver mais ' + hiddenImagesCount + ' imagens'
+						: 'Ampliar imagem: ' + image.alt
+				"
+				(click)="openGallery(i)"
+			>
+				<img class="post__image" [src]="image.src" [alt]="image.alt" loading="lazy" />
+				<span
+					class="post__image-more"
+					*ngIf="last && hiddenImagesCount"
+					aria-hidden="true"
+					>+{{ hiddenImagesCount }}</span
+				>
+			</button>
+		</div>
+
+		<div class="post__body">
+			<section
+				class="post__section"
+				*ngFor="let section of activity.sections"
+				[id]="section.id"
+			>
+				<h2 class="post__section-title">{{ section.title }}</h2>
+
+				<ng-container *ngFor="let block of section.blocks" [ngSwitch]="block.type">
+					<p *ngSwitchCase="'paragraph'">{{ $any(block).text }}</p>
+					<blockquote *ngSwitchCase="'quote'">{{ $any(block).text }}</blockquote>
+					<ul *ngSwitchCase="'list'">
+						<li *ngFor="let item of $any(block).items">{{ item }}</li>
+					</ul>
+					<p *ngSwitchCase="'link'">
+						{{ $any(block).text }}
+						<a
+							[href]="$any(block).url"
+							target="_blank"
+							rel="noopener noreferrer"
+							>{{ $any(block).label }}</a
+						>
+					</p>
+				</ng-container>
+			</section>
+
+			<section
+				class="post__section"
+				*ngIf="activity.people?.length"
+				[id]="peopleSectionId"
+			>
+				<h2 class="post__section-title">Quem fez parte</h2>
+
+				<div class="post__people-group" *ngFor="let group of activity.people">
+					<h3 class="post__people-title">{{ group.title }}</h3>
+					<ul class="post__people">
+						<li class="post__person" *ngFor="let person of group.people">
+							<a
+								class="post__person-link"
+								[href]="person.url"
+								target="_blank"
+								rel="noopener noreferrer"
+								>{{ person.name }}</a
+							>
+							<span class="post__person-role" *ngIf="person.role">{{
+								person.role
+							}}</span>
+						</li>
+					</ul>
+				</div>
+			</section>
+
+			<p class="post__tags" *ngIf="activity.topics?.length">
+				<span *ngFor="let topic of activity.topics">#{{ topic }}</span>
+			</p>
+		</div>
+
+		<footer class="post__links" *ngIf="activity.links?.length">
+			<a
+				*ngFor="let link of activity.links"
+				class="post__link"
+				[href]="link.url"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				{{ link.label }}
+				<svg class="post__link-icon" aria-hidden="true">
+					<use
+						xlink:href="assets/icons/arrow-up-right-icon.svg#arrow-up-right-icon"
+					></use>
+				</svg>
+			</a>
+		</footer>
+	</article>
+
+	<aside class="post-toc" aria-label="Nesta página">
+		<nav class="post-toc__nav">
+			<p class="post-toc__title">Nesta página</p>
+			<ol class="post-toc__list">
+				<li *ngFor="let item of tocItems">
+					<a
+						class="post-toc__link"
+						[class.post-toc__link--active]="activeSectionId === item.id"
+						[attr.aria-current]="activeSectionId === item.id ? 'location' : null"
+						[href]="'#' + item.id"
+						(click)="scrollToSection($event, item.id)"
+						>{{ item.title }}</a
+					>
+				</li>
+			</ol>
+		</nav>
+	</aside>
+</div>
+
+<app-project-gallery-modal
+	*ngIf="galleryOpen && activity"
+	[images]="imageSources"
+	[title]="activity.title"
+	[startIndex]="galleryStartIndex"
+	(closed)="closeGallery()"
+></app-project-gallery-modal>

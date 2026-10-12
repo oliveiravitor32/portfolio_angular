@@ -30,6 +30,10 @@
 	--transition-timing: cubic-bezier(0.41, 0.1, 0.13, 1);
 	--viewport-padding: var(--sp-8);
 	--max-body-width: 1024px;
+	/* 1ch é a largura do "0"; 66ch dá em média 70 caracteres reais por linha */
+	--max-line: 66ch;
+	/* altura do header fixo; conteúdo fixo (como o sumário) desconta esse valor */
+	--header-height: 56px;
 }
 
 body.light-theme {
@@ -117,14 +121,26 @@ h3 {
 
 .tech-chip {
 	padding: var(--sp-1) var(--sp-2);
-	border-radius: 5px;
+	border-radius: 6px;
 	background-color: var(--accent-soft);
 	color: var(--accent);
-	font-size: 0.75rem;
+	font-size: 1rem;
 	font-weight: var(--font-weight-bold);
 	line-height: 1.4;
 }
 
 body.modal-open {
 	overflow: hidden;
+}
+
+/* Legibilidade: no máximo 70 caracteres por linha em qualquer texto */
+p,
+li,
+dd,
+blockquote,
+h1,
+h2,
+h3,
+h4 {
+	max-width: var(--max-line);
 }

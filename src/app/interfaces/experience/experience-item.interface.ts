@@ -8,6 +8,7 @@ export interface IExperienceItem {
 	endDate?: string;
 	location?: string;
 	details?: string[];
+	highlights?: string[];
 	skills?: string[];
 	logoUrl: string;
 }

@@ -1,0 +1,132 @@
+<article class="case-study" *ngIf="project && caseStudy">
+	<a class="case-study__back" routerLink="/projetos">&larr; Todos os projetos</a>
+
+	<header class="case-study__header">
+		<p class="case-study__eyebrow">Estudo de caso</p>
+		<h1 class="case-study__title">{{ project.title }}</h1>
+		<p class="case-study__subtitle">{{ caseStudy.subtitle }}</p>
+
+		<dl class="case-study__meta">
+			<div class="case-study__meta-item">
+				<dt>Período</dt>
+				<dd>{{ caseStudy.period }}</dd>
+			</div>
+			<div class="case-study__meta-item">
+				<dt>Status</dt>
+				<dd>{{ caseStudy.status }}</dd>
+			</div>
+		</dl>
+
+		<ul class="tech-chips" aria-label="Tecnologias usadas">
+			<li class="tech-chip" *ngFor="let technology of project.technologies">
+				{{ technology }}
+			</li>
+		</ul>
+
+		<div class="case-study__links">
+			<a
+				*ngIf="project.demo_url"
+				class="case-study__link case-study__link--primary"
+				[href]="project.demo_url"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				Abrir demo
+				<svg class="case-study__link-icon" aria-hidden="true">
+					<use
+						xlink:href="assets/icons/arrow-up-right-icon.svg#arrow-up-right-icon"
+					></use>
+				</svg>
+			</a>
+			<a
+				class="case-study__link"
+				[href]="project.code_url"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<svg class="case-study__link-icon" aria-hidden="true">
+					<use xlink:href="assets/icons/code-icon.svg#code-icon"></use>
+				</svg>
+				Ver código
+			</a>
+		</div>
+	</header>
+
+	<ul class="case-study__gallery" aria-label="Telas do projeto">
+		<li *ngFor="let image of project.img_urls; let i = index">
+			<button
+				type="button"
+				class="case-study__gallery-button"
+				[attr.aria-label]="'Ampliar a imagem ' + (i + 1) + ' de ' + project.title"
+				(click)="openGallery(i)"
+			>
+				<img
+					class="case-study__gallery-image"
+					[src]="image"
+					[alt]="'Tela ' + (i + 1) + ' do projeto ' + project.title"
+					loading="lazy"
+				/>
+			</button>
+		</li>
+	</ul>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">Problema</h2>
+		<p class="case-study__text" *ngFor="let paragraph of caseStudy.problem">
+			{{ paragraph }}
+		</p>
+	</section>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">Solução</h2>
+		<ul class="case-study__list">
+			<li *ngFor="let item of caseStudy.solution">{{ item }}</li>
+		</ul>
+	</section>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">Decisões técnicas</h2>
+		<ol class="case-study__cards">
+			<li class="case-study__card" *ngFor="let decision of caseStudy.decisions">
+				<h3 class="case-study__card-title">{{ decision.title }}</h3>
+				<p class="case-study__text">{{ decision.reason }}</p>
+				<p class="case-study__alternative" *ngIf="decision.alternative">
+					<span>Alternativa descartada:</span> {{ decision.alternative }}
+				</p>
+			</li>
+		</ol>
+	</section>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">Desafios</h2>
+		<div
+			class="case-study__challenge"
+			*ngFor="let challenge of caseStudy.challenges"
+		>
+			<h3 class="case-study__card-title">{{ challenge.title }}</h3>
+			<p class="case-study__text">{{ challenge.description }}</p>
+		</div>
+	</section>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">Resultados</h2>
+		<ul class="case-study__list">
+			<li *ngFor="let item of caseStudy.results">{{ item }}</li>
+		</ul>
+	</section>
+
+	<section class="case-study__section">
+		<h2 class="case-study__section-title">O que eu faria diferente</h2>
+		<ul class="case-study__list">
+			<li *ngFor="let item of caseStudy.improvements">{{ item }}</li>
+		</ul>
+	</section>
+</article>
+
+<app-project-gallery-modal
+	*ngIf="galleryOpen && project"
+	[images]="project.img_urls"
+	[title]="project.title"
+	[startIndex]="galleryStartIndex"
+	(closed)="closeGallery()"
+></app-project-gallery-modal>

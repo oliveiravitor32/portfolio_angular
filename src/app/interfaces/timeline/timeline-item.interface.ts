@@ -1,3 +1,8 @@
+export interface ITimelineLink {
+	label: string;
+	url: string;
+}
+
 export interface ITimelineItem {
 	logoUrl: string;
 	logoAlt: string;
@@ -6,5 +11,8 @@ export interface ITimelineItem {
 	subtitle: string;
 	location?: string;
 	details?: string[];
+	highlightsTitle?: string;
+	highlights?: string[];
 	skills?: string[];
+	link?: ITimelineLink;
 }

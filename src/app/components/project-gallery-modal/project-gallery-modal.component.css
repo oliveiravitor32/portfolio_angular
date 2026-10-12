@@ -17,16 +17,13 @@
 	width: fit-content;
 	max-width: 100%;
 	max-height: 100%;
-	gap: var(--sp-3);
-	pointer-events: none;
-}
-
-.gallery-modal__title,
-.gallery-modal__close,
-.gallery-modal__stage,
-.gallery-modal__dots,
-.gallery-modal__counter {
-	pointer-events: auto;
+	gap: var(--sp-4);
+	/* painel da modal: destaca o conteúdo do fundo escurecido */
+	padding: var(--sp-5);
+	background-color: var(--bg-primary);
+	border: 1px solid var(--border);
+	border-radius: 6px;
+	box-shadow: 0 24px 60px hsl(210deg 40% 2% / 0.5);
 }
 
 .gallery-modal__header {
@@ -38,7 +35,7 @@
 
 .gallery-modal__title {
 	font-size: 1.15rem;
-	color: hsl(210deg 10% 95%);
+	color: var(--text-primary);
 }
 
 .gallery-modal__close {
@@ -51,14 +48,15 @@
 	font-size: 1.75rem;
 	line-height: 1;
 	cursor: pointer;
-	color: hsl(210deg 10% 95%);
-	background-color: hsl(0deg 0% 100% / 0.1);
+	color: var(--text-primary);
+	background-color: var(--bg-secondary);
+	border: 1px solid var(--border);
 	border-radius: 6px;
 	transition: background-color var(--transition-speed) var(--transition-timing);
 }
 
 .gallery-modal__close:hover {
-	background-color: hsl(0deg 0% 100% / 0.22);
+	border-color: var(--text-secondary);
 }
 
 .gallery-modal__stage {
@@ -69,7 +67,7 @@
 	min-height: 0;
 	/* moldura retangular fixa: a largura recua quando a altura disponivel aperta,
 	   preservando a proporcao 16/10 em vez de deixar cada imagem definir a sua */
-	width: min(880px, 86vw, calc((100vh - 200px) * 1.6));
+	width: min(880px, 86vw, calc((100vh - 240px) * 1.6));
 	aspect-ratio: 16 / 10;
 }
 
@@ -77,10 +75,8 @@
 	display: block;
 	width: 100%;
 	height: 100%;
-	object-fit: cover;
-	object-position: center top;
-	border-radius: 6px;
-	box-shadow: 0 24px 60px hsl(210deg 40% 2% / 0.55);
+	object-fit: contain;
+	object-position: center;
 }
 
 .gallery-modal__nav {
@@ -90,23 +86,25 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 38px;
-	height: 38px;
+	width: 44px;
+	height: 44px;
 	font-size: 1.75rem;
 	line-height: 1;
 	cursor: pointer;
-	color: hsl(210deg 10% 95%);
-	background-color: hsl(210deg 40% 4% / 0.6);
-	border: 1px solid hsl(0deg 0% 100% / 0.18);
+	color: var(--text-primary);
+	/* fundo principal do site com 80% de opacidade, para contrastar com a foto */
+	background-color: color-mix(in srgb, var(--bg-primary) 80%, transparent);
+	border: 1px solid var(--border);
 	border-radius: 6px;
+	z-index: 1;
 	transition:
 		background-color var(--transition-speed) var(--transition-timing),
 		border-color var(--transition-speed) var(--transition-timing);
 }
 
 .gallery-modal__nav:hover {
-	background-color: hsl(210deg 40% 4% / 0.9);
-	border-color: hsl(0deg 0% 100% / 0.4);
+	background-color: var(--bg-primary);
+	border-color: var(--text-secondary);
 }
 
 .gallery-modal__nav--prev {
@@ -135,7 +133,7 @@
 	width: 10px;
 	height: 10px;
 	cursor: pointer;
-	background-color: hsl(0deg 0% 100% / 0.35);
+	background-color: var(--border);
 	border-radius: 2px;
 	transition:
 		background-color var(--transition-speed) var(--transition-timing),
@@ -143,17 +141,17 @@
 }
 
 .gallery-modal__dot:hover {
-	background-color: hsl(0deg 0% 100% / 0.65);
+	background-color: var(--text-secondary);
 }
 
 .gallery-modal__dot--active {
-	background-color: hsl(0deg 0% 100%);
+	background-color: var(--text-primary);
 	transform: scale(1.25);
 }
 
 .gallery-modal__counter {
-	font-size: 0.85rem;
-	color: hsl(210deg 10% 75%);
+	font-size: 1rem;
+	color: var(--text-secondary);
 	font-variant-numeric: tabular-nums;
 }
 
@@ -180,18 +178,22 @@
 		padding: var(--sp-4);
 	}
 
+	.gallery-modal__container {
+		padding: var(--sp-3);
+	}
+
 	.gallery-modal__nav {
-		width: 36px;
-		height: 36px;
+		width: 40px;
+		height: 40px;
 		font-size: 1.5rem;
 	}
 
 	.gallery-modal__nav--prev {
-		left: 0;
+		left: var(--sp-2);
 	}
 
 	.gallery-modal__nav--next {
-		right: 0;
+		right: var(--sp-2);
 	}
 
 	.gallery-modal__stage {
