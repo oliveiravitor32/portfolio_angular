@@ -9,3 +9,17 @@
 		padding: 120px 1.7rem 0 1.7rem;
 	}
 }
+
+/* footer sempre encostado no fim da tela, mesmo em páginas curtas */
+:host {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.main-container {
+	flex: 1;
+	width: 100%;
+	/* espaço grande entre o fim do conteúdo e o footer */
+	padding-bottom: 6rem;
+}

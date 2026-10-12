@@ -1,27 +1,51 @@
+/* Barra no pé da página, no mesmo estilo do header: largura total, borda e
+   conteúdo alinhado à mesma coluna do header */
 .footer {
 	display: flex;
-	margin: 0 auto;
-	max-width: var(--max-body-width);
+	justify-content: center;
+	width: 100%;
+	min-height: var(--header-height);
+	padding-block: var(--sp-3);
+	background-color: var(--bg-primary);
+	border-top: 1px solid var(--border);
+}
+
+.footer__inner {
+	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	background-color: var(bg-primary);
-	padding: 3rem 1.2rem 6rem 1.2rem;
+	gap: var(--sp-4);
+	width: var(--max-body-width);
+	max-width: 100%;
+	padding: 0 1.2rem;
+	font-family: var(--font-family-ui);
 }
 
 .footer__copyright {
-	display: flex;
-	font-size: 1rem;
-	color: var(--text-primary);
-}
-
-.footer_credits-link {
+	font-size: var(--font-size-description);
 	color: var(--text-secondary);
 }
 
+.footer__credits-link {
+	color: var(--text-primary);
+	transition: color var(--transition-speed) var(--transition-timing);
+}
+
+.footer__credits-link:hover {
+	color: var(--accent);
+}
+
 @media screen and (max-width: 768px) {
-	.footer {
-		padding: 3rem 1.7rem 5rem 1.7rem;
+	.footer__inner {
 		flex-direction: column-reverse;
-		gap: 1.5rem;
+		gap: var(--sp-3);
+		padding: 0 1.7rem;
+		text-align: center;
 	}
+}
+
+/* ícones menores, na escala do texto do header */
+:host ::ng-deep .social-links__icon {
+	width: 1.25rem;
+	height: 1.25rem;
 }

@@ -69,7 +69,7 @@
 }
 
 .profile-card__title {
-	font-size: 3rem;
+	font-size: var(--font-size-hero);
 	line-height: 1.15;
 	letter-spacing: -0.02em;
 	color: var(--text-primary);
@@ -96,37 +96,10 @@
 	margin-top: var(--sp-1);
 }
 
-.profile-card__actions-wrapper {
-	margin-top: var(--sp-4);
-	display: flex;
-	align-items: center;
-	gap: var(--sp-6);
-}
 
-.profile-card__action-link {
-	display: inline-flex;
-	align-items: center;
-	gap: var(--sp-2);
-	color: var(--text-primary);
-	transition: var(--transition-speed) var(--transition-timing);
-	font-weight: var(--font-weight-bold);
-}
 
-.profile-card__icon {
-	fill: var(--text-primary);
-}
 
-.profile-card__action-link--button {
-	background-color: var(--bg-primary);
-	border: 2px solid var(--border);
-	padding: var(--sp-2) var(--sp-4);
-	border-radius: 5px;
-}
 
-.profile-card__action-link--button:hover {
-	background-color: var(--gray-100);
-	border-color: var(--accent);
-}
 
 @media screen and (max-width: 768px) {
 	.profile-card {
@@ -141,7 +114,7 @@
 
 @media screen and (max-width: 480px) {
 	.profile-card__title {
-		font-size: 2.25rem;
+		font-size: var(--font-size-hero);
 	}
 
 	.profile-card__role {
@@ -151,4 +124,9 @@
 	.profile-card__text {
 		font-size: 1rem;
 	}
+}
+
+/* texto de descrição: 14px */
+.profile-card__text {
+	font-size: var(--font-size-description);
 }

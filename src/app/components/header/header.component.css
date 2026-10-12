@@ -1,4 +1,5 @@
 .header {
+	font-family: var(--font-family-ui);
 	width: 100%;
 	height: var(--header-height);
 	/* fundo principal com 80% de opacidade; o texto continua opaco */
@@ -30,8 +31,8 @@
 .header__link {
 	position: relative;
 	color: var(--text-secondary);
-	font-size: 1rem;
-	font-weight: 500;
+	font-size: var(--font-size-body);
+	font-weight: 300;
 	transition: color var(--transition-speed) var(--transition-timing);
 }
 
@@ -74,4 +75,23 @@
 	.header__navbar {
 		padding: 0 1.7rem;
 	}
+}
+
+/* redes sociais e tema no fim do header; o espaço entre os dois grupos é
+   1.5x o espaço entre os ícones */
+.header__actions {
+	--social-gap: 1rem;
+	display: flex;
+	align-items: center;
+	gap: calc(var(--social-gap) * 1.5);
+}
+
+.header__social ::ng-deep .social-links {
+	gap: var(--social-gap);
+}
+
+.header__social ::ng-deep .social-links__icon {
+	display: block;
+	width: 1.25rem;
+	height: 1.25rem;
 }
